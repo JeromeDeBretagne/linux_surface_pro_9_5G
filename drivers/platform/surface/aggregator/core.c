@@ -708,9 +708,10 @@ static int ssam_serial_hub_probe(struct serdev_device *serdev)
 	}
 
 	status = ssam_serdev_setup(serdev, ssh);
-	if (status)
+	if (status) {
 		status = dev_err_probe(dev, -ENXIO, "failed to setup serdev\n");
 		goto err_devinit;
+	}
 
 	/* Start controller. */
 	status = ssam_controller_start(ctrl);
@@ -769,11 +770,17 @@ static int ssam_serial_hub_probe(struct serdev_device *serdev)
 	 */
 	device_set_wakeup_capable(dev, true);
 
+	status = ssam_register_clients(&serdev->dev, ctrl);
+	if (status)
+		goto err_clients;
+
 	if (ssh)
 		acpi_dev_clear_dependencies(ssh);
 
 	return 0;
 
+err_clients:
+	ssam_clear_controller();
 err_mainref:
 	ssam_irq_free(ctrl);
 err_irq:
