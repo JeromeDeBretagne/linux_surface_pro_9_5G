@@ -15,6 +15,10 @@
 	model = "Microsoft Surface Pro 9 5G";
 	compatible = "microsoft,surface-pro-9-5G", "qcom,sc8280xp";
 
+	aliases {
+		serial0 = &uart18;
+	};
+
 	pmic-glink {
 		compatible = "qcom,sc8280xp-pmic-glink", "qcom,pmic-glink";
 
@@ -588,6 +592,36 @@
 		};
 	};
 
+
+	uart18_state: uart18-state {
+		cts {
+			pins = "gpio66";
+			function = "qup18";
+			bias-pull-down;
+		};
+
+		rts-tx {
+			pins = "gpio67", "gpio68";
+			function = "qup18";
+			drive-strength = <2>;
+			bias-disable;
+		};
+
+		rx {
+			pins = "gpio69";
+			function = "qup18";
+			bias-pull-up;
+		};
+	};
+
+	ssam_state: ssam-state {
+		wake-int {
+			pins = "gpio85";
+			function = "gpio";
+			bias-disable;
+		};
+	};
+
 	usb0_sbu_default: usb0-sbu-state {
 		oe-n-pins {
 			pins = "gpio101";
@@ -619,6 +653,69 @@
 			function = "gpio";
 			bias-disable;
 			drive-strength = <16>;
+		};
+	};
+};
+
+&uart18 {
+	status = "okay";
+
+	pinctrl-names = "default";
+	pinctrl-0 = <&uart18_state>;
+
+	surface-aggregator {
+		compatible = "surface,aggregator";
+
+		current-speed = <4000000>;
+		uart-has-rtscts;
+		uart-parity = "n";
+
+		pinctrl-names = "default";
+		pinctrl-0 = <&ssam_state>;
+
+		ssam_wakeup-int-gpios = <&tlmm 85 GPIO_ACTIVE_HIGH>;
+
+		ssh-d3-closes-handle;
+		ssh-buffer-size = <0x30>;
+
+		rtc {
+			ssam-uid = "01:01:01:00:00";
+		};
+
+		battery {
+			ssam-uid = "01:02:01:01:00";
+		};
+
+		ac {
+			ssam-uid = "01:02:01:01:01";
+		};
+
+		thermal-sensors {
+			ssam-uid = "01:03:01:00:02";
+		};
+
+		kip-hub {
+			ssam-uid = "00:00:01:0e:00";
+
+			hid-keyboard {
+				ssam-uid = "01:15:02:01:00";
+			};
+
+			hid-pen-stash {
+				ssam-uid = "01:15:02:02:00";
+			};
+
+			hid-touchpad {
+				ssam-uid = "01:15:02:03:00";
+			};
+
+			hid-tcfwupd {
+				ssam-uid = "01:15:02:05:00";
+			};
+		};
+
+		kip-tablet-mode-switch {
+			ssam-uid = "01:0e:01:00:01";
 		};
 	};
 };
