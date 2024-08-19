@@ -614,6 +614,14 @@
 		};
 	};
 
+	ssam_state: ssam-state {
+		wake-int {
+			pins = "gpio85";
+			function = "gpio";
+			bias-disable;
+		};
+	};
+
 	usb0_sbu_default: usb0-sbu-state {
 		oe-n-pins {
 			pins = "gpio101";
@@ -661,6 +669,11 @@
 		current-speed = <4000000>;
 		uart-has-rtscts;
 		uart-parity = "n";
+
+		pinctrl-names = "default";
+		pinctrl-0 = <&ssam_state>;
+
+		ssam_wakeup-int-gpios = <&tlmm 85 GPIO_ACTIVE_HIGH>;
 
 		ssh-d3-closes-handle;
 		ssh-buffer-size = <0x30>;
