@@ -733,9 +733,9 @@ static int ssam_serial_hub_probe(struct serdev_device *serdev)
 		goto err_initrq;
 
 	/* Set up IRQ. */
-	// status = ssam_irq_setup(ctrl);
-	// if (status)
-	// 	goto err_irq;
+	status = ssam_irq_setup(ctrl);
+	if (status)
+		goto err_irq;
 
 	/* Finally, set main controller reference. */
 	status = ssam_try_set_controller(ctrl);
