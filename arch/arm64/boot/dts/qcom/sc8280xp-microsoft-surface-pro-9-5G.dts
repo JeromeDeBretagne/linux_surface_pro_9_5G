@@ -250,7 +250,7 @@
 };
 
 &apps_rsc {
-	pmc8280-1-rpmh-regulators {
+	regulators-0 {
 		compatible = "qcom,pm8350-rpmh-regulators";
 		qcom,pmic-id = "b";
 
@@ -307,7 +307,7 @@
 		};
 	};
 
-	pmc8280c-rpmh-regulators {
+	regulators-1 {
 		compatible = "qcom,pm8350c-rpmh-regulators";
 		qcom,pmic-id = "c";
 
@@ -344,7 +344,7 @@
 		};
 	};
 
-	pmc8280-2-rpmh-regulators {
+	regulators-2 {
 		compatible = "qcom,pm8350-rpmh-regulators";
 		qcom,pmic-id = "d";
 
