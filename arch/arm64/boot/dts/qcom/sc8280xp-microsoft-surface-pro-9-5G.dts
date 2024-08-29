@@ -254,7 +254,10 @@
 		compatible = "qcom,pm8350-rpmh-regulators";
 		qcom,pmic-id = "b";
 
+		vdd-l1-l4-supply = <&vreg_s12b>;
 		vdd-l3-l5-supply = <&vreg_s11b>;
+		vdd-l6-l9-l10-supply = <&vreg_s12b>;
+		vdd-l8-supply = <&vreg_s12b>;
 
 		vreg_s10b: smps10 {
 			regulator-name = "vreg_s10b";
@@ -311,6 +314,10 @@
 		compatible = "qcom,pm8350c-rpmh-regulators";
 		qcom,pmic-id = "c";
 
+		vdd-l1-l12-supply = <&vreg_s1c>;
+		vdd-l2-l8-supply = <&vreg_s1c>;
+		vdd-l10-supply = <&vreg_s11b>;
+
 		vreg_s1c: smps1 {
 			regulator-name = "vreg_s1c";
 			regulator-min-microvolt = <1880000>;
@@ -349,6 +356,9 @@
 		qcom,pmic-id = "d";
 
 		vdd-l1-l4-supply = <&vreg_s11b>;
+		vdd-l3-l5-supply = <&vreg_s11b>;
+		vdd-l6-l9-l10-supply = <&vreg_s12b>;
+		vdd-l8-supply = <&vreg_s12b>;
 
 		vreg_l3d: ldo3 {
 			regulator-name = "vreg_l3d";
