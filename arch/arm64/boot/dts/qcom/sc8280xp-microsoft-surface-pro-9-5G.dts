@@ -500,6 +500,69 @@
 	};
 };
 
+&uart18 {
+	status = "okay";
+
+	pinctrl-names = "default";
+	pinctrl-0 = <&uart18_state>;
+
+	surface-aggregator {
+		compatible = "surface,aggregator";
+
+		current-speed = <4000000>;
+		uart-has-rtscts;
+		uart-parity = "n";
+
+		pinctrl-names = "default";
+		pinctrl-0 = <&ssam_state>;
+
+		ssam_wakeup-int-gpios = <&tlmm 85 GPIO_ACTIVE_HIGH>;
+
+		ssh-d3-closes-handle;
+		ssh-buffer-size = <0x30>;
+
+		rtc {
+			ssam-uid = "01:01:01:00:00";
+		};
+
+		battery {
+			ssam-uid = "01:02:01:01:00";
+		};
+
+		ac {
+			ssam-uid = "01:02:01:01:01";
+		};
+
+		thermal-sensors {
+			ssam-uid = "01:03:01:00:02";
+		};
+
+		kip-hub {
+			ssam-uid = "00:00:01:0e:00";
+
+			hid-keyboard {
+				ssam-uid = "01:15:02:01:00";
+			};
+
+			hid-pen-stash {
+				ssam-uid = "01:15:02:02:00";
+			};
+
+			hid-touchpad {
+				ssam-uid = "01:15:02:03:00";
+			};
+
+			hid-tcfwupd {
+				ssam-uid = "01:15:02:05:00";
+			};
+		};
+
+		kip-tablet-mode-switch {
+			ssam-uid = "01:0e:01:00:01";
+		};
+	};
+};
+
 &usb_0 {
 	status = "okay";
 };
@@ -747,69 +810,6 @@
 			function = "gpio";
 			bias-disable;
 			drive-strength = <16>;
-		};
-	};
-};
-
-&uart18 {
-	status = "okay";
-
-	pinctrl-names = "default";
-	pinctrl-0 = <&uart18_state>;
-
-	surface-aggregator {
-		compatible = "surface,aggregator";
-
-		current-speed = <4000000>;
-		uart-has-rtscts;
-		uart-parity = "n";
-
-		pinctrl-names = "default";
-		pinctrl-0 = <&ssam_state>;
-
-		ssam_wakeup-int-gpios = <&tlmm 85 GPIO_ACTIVE_HIGH>;
-
-		ssh-d3-closes-handle;
-		ssh-buffer-size = <0x30>;
-
-		rtc {
-			ssam-uid = "01:01:01:00:00";
-		};
-
-		battery {
-			ssam-uid = "01:02:01:01:00";
-		};
-
-		ac {
-			ssam-uid = "01:02:01:01:01";
-		};
-
-		thermal-sensors {
-			ssam-uid = "01:03:01:00:02";
-		};
-
-		kip-hub {
-			ssam-uid = "00:00:01:0e:00";
-
-			hid-keyboard {
-				ssam-uid = "01:15:02:01:00";
-			};
-
-			hid-pen-stash {
-				ssam-uid = "01:15:02:02:00";
-			};
-
-			hid-touchpad {
-				ssam-uid = "01:15:02:03:00";
-			};
-
-			hid-tcfwupd {
-				ssam-uid = "01:15:02:05:00";
-			};
-		};
-
-		kip-tablet-mode-switch {
-			ssam-uid = "01:0e:01:00:01";
 		};
 	};
 };
