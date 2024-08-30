@@ -245,10 +245,6 @@
 	};
 };
 
-&gpu_smmu {
-	status = "okay";
-};
-
 &apps_rsc {
 	regulators-0 {
 		compatible = "qcom,pm8350-rpmh-regulators";
@@ -409,10 +405,6 @@
 	status = "okay";
 };
 
-&gmu {
-	status = "okay";
-};
-
 &gpu {
 	status = "okay";
 
@@ -420,10 +412,6 @@
 		memory-region = <&gpu_mem>;
 		firmware-name = "qcom/sc8280xp/MICROSOFT/SurfacePro9/qcdxkmsuc8280.mbn";
 	};
-};
-
-&gpucc {
-	status = "okay";
 };
 
 &mdss0 {
@@ -446,14 +434,6 @@
 &mdss0_dp1_out {
 	data-lanes = <0 1>;
 	remote-endpoint = <&usb_1_qmpphy_dp_in>;
-};
-
-&pmk8280_pon_pwrkey {
-	status = "okay";
-};
-
-&qup0 {
-	status = "okay";
 };
 
 &pcie2a {
@@ -530,6 +510,10 @@
 	status = "okay";
 };
 
+&pmk8280_pon_pwrkey {
+	status = "okay";
+};
+
 &pmk8280_rtc {
 	nvmem-cells = <&rtc_offset>;
 	nvmem-cell-names = "offset";
@@ -543,6 +527,10 @@
 	rtc_offset: rtc-offset@bc {
 		reg = <0xbc 0x4>;
 	};
+};
+
+&qup0 {
+	status = "okay";
 };
 
 &qup1 {
@@ -789,10 +777,10 @@
 		};
 
 		wake-n-pins {
-		       pins = "gpio145";
-		       function = "gpio";
-		       drive-strength = <2>;
-		       bias-pull-up;
+			pins = "gpio145";
+			function = "gpio";
+			drive-strength = <2>;
+			bias-pull-up;
 	       };
 	};
 
@@ -843,6 +831,14 @@
 	};
 
 
+	ssam_state: ssam-state {
+		wake-int {
+			pins = "gpio85";
+			function = "gpio";
+			bias-disable;
+		};
+	};
+
 	uart2_default: uart2-default-state {
 		cts-pins {
 			pins = "gpio121";
@@ -889,14 +885,6 @@
 			pins = "gpio69";
 			function = "qup18";
 			bias-pull-up;
-		};
-	};
-
-	ssam_state: ssam-state {
-		wake-int {
-			pins = "gpio85";
-			function = "gpio";
-			bias-disable;
 		};
 	};
 
