@@ -13,7 +13,7 @@
 
 / {
 	model = "Microsoft Surface Pro 9 5G";
-	compatible = "microsoft,surface-pro-9-5G", "qcom,sc8280xp";
+	compatible = "microsoft,arcata", "qcom,sc8280xp";
 
 	aliases {
 		serial0 = &uart18;
