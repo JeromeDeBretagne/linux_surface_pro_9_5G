@@ -505,11 +505,15 @@
 
 	status = "okay";
 
+	pinctrl-0 = <&edp_hpd_active>;
+	pinctrl-names = "default";
+
 	aux-bus {
 		panel {
 			compatible = "edp-panel";
 
 			backlight = <&backlight>;
+			hpd-gpios = <&tlmm 3 GPIO_ACTIVE_HIGH>;
 			power-supply = <&vreg_edp_3p3>;
 
 			port {
@@ -956,6 +960,12 @@
 			function = "gpio";
 			bias-pull-down;
 		};
+	};
+
+	edp_hpd_active: edp-hpd-active-state {
+		pins = "gpio3";
+		function = "gpio";
+		drive-strength = <2>;
 	};
 
 	edp_reg_en: edp-reg-en-state {
